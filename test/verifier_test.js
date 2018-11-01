@@ -10,7 +10,8 @@ contract('1. ZKSNARKs test:: ', function(){
     });
   });
 
-  it("should resolve to true for other input", function(){
+  I = [1,1]
+  it("should resolve to false for other input", function(){
      Verifier.deployed().then(function(instance){
       return instance.verifyTx.call(A,A_p,B,B_p,C,C_p,H,K,I);
     }).then(function(value){
