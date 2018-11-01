@@ -39,40 +39,46 @@ Generate proof : generates the proof required to be verified on chain
 
 The bank acts as the Generator and Prover in this interaction
 
-# Build the Docker image
-$ docker run -ti kyroy/zokrates /bin/bash
-$ cd Zokrates
-
+### Build the Docker image
+```
+docker run -ti kyroy/zokrates /bin/bash
+cd Zokrates
+```
 Create file VIP_check.code in the zokrates directory(VIP test is simple check for points greater than 5000, this 5000 is a private input):
 
+```
 def main(x,private s1):
     x == s1
     return 1
-
+```
 Run the following(5000 points qualifies towards VIP status for the user in this example)
+```
 ./target/release/zokrates compile -i VIP_check.code
 ./target/release/zokrates setup
 ./target/release/zokrates export-verifier
+```
 
 From the above we get the verifier.sol contract that contains our verification key. 
 
-Important Detail: The bank is the ‘trusted party’ here and so they would go about performing the respective duties of one, namely: 
+**Important Detail**: The bank is the ‘trusted party’ here and so they would go about performing the respective duties of one, namely: 
 Generating the witness as only they have access to private input (w)(the credibility of the individual in question). Zokrates generates the private and public inputs that are required for the next step
 Generating the proof using the private and public inputs generated in the last step along with proving key.
 
+```
 ./target/release/zokrates compute-witness -a 5000 --interactive 5000
-
+```
 (the interactive flag is used to set the private input). And then generate the proof.
-
+```
 ./target/release/zokrates generate-proof
-
+```
 You would now need to export the required generated files from your docker container :
+```
 ‘docker ps’ will give you the container ids 
 ‘docker cp [relevant_container_id]:root/ZoKrates/’ with the following the suffixes will be useful.
 verifier.sol  ./
-
+```
 And the variables generate for the proof. For the given example, I've provided proof values and the verifier.sol generated.
-
+```
 Proof:
 A = 0xf6d8181a05fcbc7b0677d86b8345dde4509db736d9400eedc1fa8540b6133d, 0x29a5251f3b220113d3fe898920b8d3447aa7bf416a67311372080039129f25
 A_p = 0x1cbd056424db7ccfba291357bb7eb123213f190ad686a228010556f5eb5d228c, 0x283fc88deda932505839f242ab1a59e5d48f908700b0350f1da7fdd230ab4137
@@ -82,7 +88,7 @@ C = 0x194f708a375865d16ef5b0ac490137c27fd2cbe1026298005b003bd8a49b3243, 0x1f3614
 C_p = 0x198d6a2ef0eb087d291ec18cabdaa77fb21a536a2f9883c6533573f9e4848ac8, 0x11a0bbdd9f48575ff1f02d130b060bf8f8a54933a4342dcb43d2467e573bdce
 H = 0x262cf771eccecd7e30104b14f30119553f2155554ab1451187f3b931b9028957, 0x291cfd963f09850b8f507f821ae1344da75229c3a634b376760cd06a00e39b9e
 K = 0x23bd5886031e3556a398b362b195f2761b08f582e664e4df8db1713f4e2dddbe, 0x117fec4a0e44dafff10be82d9035c4d8b22b9d351e7ab70aa60b2f694afb4381
-
+```
 
 ### Zokrates setup(the credit card company would do this)
 
