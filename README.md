@@ -77,7 +77,7 @@ You would now need to export the required generated files from your docker conta
 ‘docker cp [relevant_container_id]:root/ZoKrates/’ with the following the suffixes will be useful.
 verifier.sol  ./
 ```
-And the variables generate for the proof. For the given example, I've provided proof values and the verifier.sol generated.
+And the variables generate for the proof. For the given example, I've provided proof values and the verifier.sol generated(the only things needed to proceed to the next step).
 ```
 Proof:
 A = 0xf6d8181a05fcbc7b0677d86b8345dde4509db736d9400eedc1fa8540b6133d, 0x29a5251f3b220113d3fe898920b8d3447aa7bf416a67311372080039129f25
@@ -96,6 +96,37 @@ The Credit card company acts as the Verifier in this interaction.
 
 So to verify the proof they are given, the proof, the verification key generated and the public input, x, must be passed into the Verification function. 
 
+Navigate to an empty directory on your computer and run
+```
+truffle init
+npm init
+```
+Make sure Ganache is running
+
+Add the verifier.sol to the contracts folder. Add the provided 2_deploy_contracts.js to the migrations directory. If on windows, delete the truffle-config.js folder(known to cause bugs). Edit the truffle.js to be similar to the file provided here. 
+
+```
+truffle compile
+truffle migrate
+truffle console
+```
+
+Input the each of the proof values like shown:
+```
+C = ["0x194f708a375865d16ef5b0ac490137c27fd2cbe1026298005b003bd8a49b3243", "0x1f3614d64f9d3d80d8d437d83f4fbdaae5bca6d7be2002012871f85a5786614"]
+```
+And the input here for checking if the proof indeed valid, I
+```
+I = [5000,1]
+```
+The variable I represent the input and the expected output. To test whether our proof is valid, we run the generated Verifier's method, VerifyTx.
+```
+Verifier.deployed().then(function(instance){return instance.verifyTx.call(A,A_p,B,B_p,C,C_p,H,K,I);}).then(function(value){return value});
+```
+Great!
+
+
+To run tests for our contract, run `test` after completing the previous steps. 
 
 
 
