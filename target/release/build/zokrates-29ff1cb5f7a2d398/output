@@ -1,0 +1,41 @@
+TARGET = Some("x86_64-unknown-linux-gnu")
+OPT_LEVEL = Some("3")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CXX_x86_64-unknown-linux-gnu = None
+CXX_x86_64_unknown_linux_gnu = None
+HOST_CXX = None
+CXX = None
+HOST = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+CXXFLAGS_x86_64-unknown-linux-gnu = None
+CXXFLAGS_x86_64_unknown_linux_gnu = None
+HOST_CXXFLAGS = None
+CXXFLAGS = None
+running: "c++" "-O3" "-ffunction-sections" "-fdata-sections" "-fPIC" "-g" "-m64" "-I" "/usr/local/include" "-I" "/usr/local/include/libsnark" "-std=c++11" "-DCURVE_ALT_BN128" "-Wall" "-Wextra" "-o" "/root/ZoKrates/target/release/build/zokrates-29ff1cb5f7a2d398/out/lib/wraplibsnark.o" "-c" "lib/wraplibsnark.cpp"
+exit code: 0
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+HOST = Some("x86_64-unknown-linux-gnu")
+AR_x86_64-unknown-linux-gnu = None
+AR_x86_64_unknown_linux_gnu = None
+HOST_AR = None
+AR = None
+TARGET = Some("x86_64-unknown-linux-gnu")
+TARGET = Some("x86_64-unknown-linux-gnu")
+running: "ar" "crs" "/root/ZoKrates/target/release/build/zokrates-29ff1cb5f7a2d398/out/libwraplibsnark.a" "/root/ZoKrates/target/release/build/zokrates-29ff1cb5f7a2d398/out/lib/wraplibsnark.o"
+exit code: 0
+TARGET = Some("x86_64-unknown-linux-gnu")
+cargo:rustc-link-lib=static=wraplibsnark
+cargo:rustc-link-search=native=/root/ZoKrates/target/release/build/zokrates-29ff1cb5f7a2d398/out
+TARGET = Some("x86_64-unknown-linux-gnu")
+cargo:rustc-link-lib=stdc++
+cargo:rustc-link-lib=gmp
+cargo:rustc-link-lib=gmpxx
+cargo:rustc-link-lib=supercop
+cargo:rustc-link-lib=snark
+cargo:rustc-link-search=/usr/local/lib
